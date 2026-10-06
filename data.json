@@ -3,7 +3,7 @@
   "leaderboard": [
     {
       "name": "Mathieu Huot",
-      "total_points": 103,
+      "total_points": 121,
       "skaters": [
         {
           "name": "Evan Bouchard",
@@ -190,40 +190,40 @@
         {
           "name": "Avalanche du Colorado",
           "abbrev": "COL",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 6
         },
         {
           "name": "Lightning de Tampa Bay",
           "abbrev": "TBL",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 6
         },
         {
           "name": "Devils du New Jersey",
           "abbrev": "NJD",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 1,
           "ot_losses": 0,
-          "points": 0
+          "points": 2
         },
         {
           "name": "Sharks de San Jose",
           "abbrev": "SJS",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 2,
           "ot_losses": 0,
-          "points": 0
+          "points": 4
         }
       ]
     },
     {
       "name": "Olivier Jubelin",
-      "total_points": 95,
+      "total_points": 109,
       "skaters": [
         {
           "name": "Cale Makar",
@@ -411,39 +411,39 @@
           "name": "Hurricanes de la Caroline",
           "abbrev": "CAR",
           "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_wins": 1,
+          "ot_losses": 1,
+          "points": 3
         },
         {
           "name": "Sabres de Buffalo",
           "abbrev": "BUF",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         },
         {
           "name": "Penguins de Pittsburgh",
           "abbrev": "PIT",
-          "reg_wins": 0,
-          "ot_wins": 0,
+          "reg_wins": 1,
+          "ot_wins": 1,
           "ot_losses": 0,
-          "points": 0
+          "points": 5
         },
         {
           "name": "Predators de Nashville",
           "abbrev": "NSH",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         }
       ]
     },
     {
       "name": "Alondra Rima",
-      "total_points": 84,
+      "total_points": 101,
       "skaters": [
         {
           "name": "Connor McDavid",
@@ -630,260 +630,40 @@
         {
           "name": "Stars de Dallas",
           "abbrev": "DAL",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         },
         {
           "name": "Oilers d'Edmonton",
           "abbrev": "EDM",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 7
         },
         {
           "name": "Islanders de New York",
           "abbrev": "NYI",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         },
         {
           "name": "Sharks de San Jose",
           "abbrev": "SJS",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 2,
           "ot_losses": 0,
-          "points": 0
-        }
-      ]
-    },
-    {
-      "name": "Antoine Duguay",
-      "total_points": 79,
-      "skaters": [
-        {
-          "name": "Connor McDavid",
-          "position": "C",
-          "goals": 2,
-          "assists": 7,
-          "points": 11
-        },
-        {
-          "name": "Quinn Hughes",
-          "position": "D",
-          "goals": 1,
-          "assists": 2,
-          "points": 7
-        },
-        {
-          "name": "Jason Robertson",
-          "position": "L",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Nick Suzuki",
-          "position": "C",
-          "goals": 1,
-          "assists": 3,
-          "points": 5
-        },
-        {
-          "name": "Cole Caufield",
-          "position": "R",
-          "goals": 2,
-          "assists": 0,
           "points": 4
-        },
-        {
-          "name": "Wyatt Johnston",
-          "position": "C",
-          "goals": 0,
-          "assists": 1,
-          "points": 1
-        },
-        {
-          "name": "Jack Eichel",
-          "position": "C",
-          "goals": 1,
-          "assists": 5,
-          "points": 7
-        },
-        {
-          "name": "Aleksander Barkov",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Tage Thompson",
-          "position": "C",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Noah Dobson",
-          "position": "D",
-          "goals": 0,
-          "assists": 1,
-          "points": 2
-        },
-        {
-          "name": "Matthew Tkachuk",
-          "position": "L",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Filip Forsberg",
-          "position": "L",
-          "goals": 0,
-          "assists": 1,
-          "points": 1
-        },
-        {
-          "name": "John Tavares",
-          "position": "C",
-          "goals": 0,
-          "assists": 2,
-          "points": 2
-        },
-        {
-          "name": "Ivan Demidov",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Juraj Slafkovský",
-          "position": "L",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Pavel Dorofeyev",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Steven Stamkos",
-          "position": "C",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Jared McCann",
-          "position": "L",
-          "goals": 0,
-          "assists": 4,
-          "points": 4
-        },
-        {
-          "name": "Jackson Blake",
-          "position": "R",
-          "goals": 0,
-          "assists": 2,
-          "points": 2
-        },
-        {
-          "name": "Matt Duchene",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Logan Stankoven",
-          "position": "C",
-          "goals": 1,
-          "assists": 0,
-          "points": 2
-        },
-        {
-          "name": "Alex Newhook",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        }
-      ],
-      "goalies": [
-        {
-          "name": "Sergei Bobrovsky",
-          "position": "G",
-          "wins": 0,
-          "shutouts": 0,
-          "otLosses": 0,
-          "points": 0
-        },
-        {
-          "name": "Igor Shesterkin",
-          "position": "G",
-          "wins": 2,
-          "shutouts": 0,
-          "otLosses": 0,
-          "points": 8
-        },
-        {
-          "name": "Jakub Dobes",
-          "position": "G",
-          "wins": 1,
-          "shutouts": 0,
-          "otLosses": 1,
-          "points": 5
-        }
-      ],
-      "teams": [
-        {
-          "name": "Avalanche du Colorado",
-          "abbrev": "COL",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Sabres de Buffalo",
-          "abbrev": "BUF",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Kings de Los Angeles",
-          "abbrev": "LAK",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Sharks de San Jose",
-          "abbrev": "SJS",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
         }
       ]
     },
     {
       "name": "Alain Roy",
-      "total_points": 76,
+      "total_points": 95,
       "skaters": [
         {
           "name": "Cale Makar",
@@ -1070,68 +850,68 @@
         {
           "name": "Avalanche du Colorado",
           "abbrev": "COL",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 6
         },
         {
           "name": "Oilers d'Edmonton",
           "abbrev": "EDM",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 7
         },
         {
           "name": "Flyers de Philadelphie",
           "abbrev": "PHI",
           "reg_wins": 0,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 2,
+          "points": 2
         },
         {
           "name": "Sharks de San Jose",
           "abbrev": "SJS",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 2,
           "ot_losses": 0,
-          "points": 0
+          "points": 4
         }
       ]
     },
     {
-      "name": "Yanick Tremblay",
-      "total_points": 74,
+      "name": "Antoine Duguay",
+      "total_points": 93,
       "skaters": [
         {
-          "name": "Nathan MacKinnon",
+          "name": "Connor McDavid",
           "position": "C",
           "goals": 2,
-          "assists": 3,
+          "assists": 7,
+          "points": 11
+        },
+        {
+          "name": "Quinn Hughes",
+          "position": "D",
+          "goals": 1,
+          "assists": 2,
           "points": 7
         },
         {
-          "name": "Lane Hutson",
-          "position": "D",
-          "goals": 0,
+          "name": "Jason Robertson",
+          "position": "L",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Nick Suzuki",
+          "position": "C",
+          "goals": 1,
           "assists": 3,
-          "points": 6
-        },
-        {
-          "name": "David Pastrnak",
-          "position": "R",
-          "goals": 0,
-          "assists": 2,
-          "points": 2
-        },
-        {
-          "name": "Charlie McAvoy",
-          "position": "D",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
+          "points": 5
         },
         {
           "name": "Cole Caufield",
@@ -1141,29 +921,29 @@
           "points": 4
         },
         {
-          "name": "Miro Heiskanen",
-          "position": "D",
-          "goals": 2,
-          "assists": 0,
-          "points": 6
-        },
-        {
-          "name": "Mikko Rantanen",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Jackson LaCombe",
-          "position": "D",
+          "name": "Wyatt Johnston",
+          "position": "C",
           "goals": 0,
-          "assists": 2,
-          "points": 4
+          "assists": 1,
+          "points": 1
         },
         {
-          "name": "Mitch Marner",
-          "position": "R",
+          "name": "Jack Eichel",
+          "position": "C",
+          "goals": 1,
+          "assists": 5,
+          "points": 7
+        },
+        {
+          "name": "Aleksander Barkov",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Tage Thompson",
+          "position": "C",
           "goals": 1,
           "assists": 1,
           "points": 3
@@ -1183,24 +963,24 @@
           "points": 3
         },
         {
-          "name": "Logan Cooley",
+          "name": "Filip Forsberg",
+          "position": "L",
+          "goals": 0,
+          "assists": 1,
+          "points": 1
+        },
+        {
+          "name": "John Tavares",
           "position": "C",
           "goals": 0,
-          "assists": 3,
-          "points": 3
+          "assists": 2,
+          "points": 2
         },
         {
-          "name": "Rasmus Andersson",
-          "position": "D",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Cole Hutson",
-          "position": "D",
+          "name": "Ivan Demidov",
+          "position": "R",
           "goals": 1,
-          "assists": 0,
+          "assists": 1,
           "points": 3
         },
         {
@@ -1211,11 +991,11 @@
           "points": 0
         },
         {
-          "name": "Matthew Knies",
-          "position": "L",
-          "goals": 2,
-          "assists": 2,
-          "points": 6
+          "name": "Pavel Dorofeyev",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
         },
         {
           "name": "Steven Stamkos",
@@ -1239,17 +1019,17 @@
           "points": 2
         },
         {
-          "name": "Mike Matheson",
-          "position": "D",
+          "name": "Matt Duchene",
+          "position": "C",
           "goals": 0,
-          "assists": 1,
-          "points": 2
+          "assists": 0,
+          "points": 0
         },
         {
-          "name": "Philip Broberg",
-          "position": "D",
-          "goals": 0,
-          "assists": 1,
+          "name": "Logan Stankoven",
+          "position": "C",
+          "goals": 1,
+          "assists": 0,
           "points": 2
         },
         {
@@ -1262,7 +1042,7 @@
       ],
       "goalies": [
         {
-          "name": "Connor Hellebuyck",
+          "name": "Sergei Bobrovsky",
           "position": "G",
           "wins": 0,
           "shutouts": 0,
@@ -1270,12 +1050,12 @@
           "points": 0
         },
         {
-          "name": "Logan Thompson",
+          "name": "Igor Shesterkin",
           "position": "G",
-          "wins": 1,
+          "wins": 2,
           "shutouts": 0,
           "otLosses": 0,
-          "points": 4
+          "points": 8
         },
         {
           "name": "Jakub Dobes",
@@ -1288,42 +1068,42 @@
       ],
       "teams": [
         {
-          "name": "Canadiens de Montréal",
-          "abbrev": "MTL",
-          "reg_wins": 0,
+          "name": "Avalanche du Colorado",
+          "abbrev": "COL",
+          "reg_wins": 2,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 6
         },
         {
-          "name": "Oilers d'Edmonton",
-          "abbrev": "EDM",
-          "reg_wins": 0,
+          "name": "Sabres de Buffalo",
+          "abbrev": "BUF",
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         },
         {
           "name": "Kings de Los Angeles",
           "abbrev": "LAK",
           "reg_wins": 0,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 1
         },
         {
-          "name": "Flames de Calgary",
-          "abbrev": "CGY",
+          "name": "Sharks de San Jose",
+          "abbrev": "SJS",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 2,
           "ot_losses": 0,
-          "points": 0
+          "points": 4
         }
       ]
     },
     {
       "name": "Jean-Philip Tremblay",
-      "total_points": 73,
+      "total_points": 89,
       "skaters": [
         {
           "name": "Cale Makar",
@@ -1510,40 +1290,260 @@
         {
           "name": "Canadiens de Montréal",
           "abbrev": "MTL",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 4
         },
         {
           "name": "Sabres de Buffalo",
           "abbrev": "BUF",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
         },
         {
           "name": "Devils du New Jersey",
           "abbrev": "NJD",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 1,
           "ot_losses": 0,
-          "points": 0
+          "points": 2
         },
         {
           "name": "Jets de Winnipeg",
           "abbrev": "WPG",
-          "reg_wins": 0,
+          "reg_wins": 2,
+          "ot_wins": 0,
+          "ot_losses": 1,
+          "points": 7
+        }
+      ]
+    },
+    {
+      "name": "Aya el Khazen",
+      "total_points": 88,
+      "skaters": [
+        {
+          "name": "Nikita Kucherov",
+          "position": "R",
+          "goals": 1,
+          "assists": 3,
+          "points": 5
+        },
+        {
+          "name": "Lane Hutson",
+          "position": "D",
+          "goals": 0,
+          "assists": 3,
+          "points": 6
+        },
+        {
+          "name": "David Pastrnak",
+          "position": "R",
+          "goals": 0,
+          "assists": 2,
+          "points": 2
+        },
+        {
+          "name": "Nick Suzuki",
+          "position": "C",
+          "goals": 1,
+          "assists": 3,
+          "points": 5
+        },
+        {
+          "name": "Cole Caufield",
+          "position": "R",
+          "goals": 2,
+          "assists": 0,
+          "points": 4
+        },
+        {
+          "name": "Sidney Crosby",
+          "position": "C",
+          "goals": 0,
+          "assists": 2,
+          "points": 2
+        },
+        {
+          "name": "Matthew Schaefer",
+          "position": "D",
+          "goals": 0,
+          "assists": 2,
+          "points": 4
+        },
+        {
+          "name": "Jackson LaCombe",
+          "position": "D",
+          "goals": 0,
+          "assists": 2,
+          "points": 4
+        },
+        {
+          "name": "John Carlson",
+          "position": "D",
+          "goals": 0,
+          "assists": 2,
+          "points": 4
+        },
+        {
+          "name": "Seth Jarvis",
+          "position": "R",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Clayton Keller",
+          "position": "R",
+          "goals": 0,
+          "assists": 5,
+          "points": 5
+        },
+        {
+          "name": "Brad Marchand",
+          "position": "L",
+          "goals": 1,
+          "assists": 0,
+          "points": 2
+        },
+        {
+          "name": "Rasmus Andersson",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Ivan Demidov",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Andrei Svechnikov",
+          "position": "R",
+          "goals": 0,
+          "assists": 3,
+          "points": 3
+        },
+        {
+          "name": "Bowen Byram",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Steven Stamkos",
+          "position": "C",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Thomas Harley",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Anton Frondell",
+          "position": "C",
+          "goals": 0,
+          "assists": 2,
+          "points": 2
+        },
+        {
+          "name": "Mike Matheson",
+          "position": "D",
+          "goals": 0,
+          "assists": 1,
+          "points": 2
+        },
+        {
+          "name": "Zach Benson",
+          "position": "L",
+          "goals": 0,
+          "assists": 1,
+          "points": 1
+        },
+        {
+          "name": "Alex Newhook",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        }
+      ],
+      "goalies": [
+        {
+          "name": "Sergei Bobrovsky",
+          "position": "G",
+          "wins": 0,
+          "shutouts": 0,
+          "otLosses": 0,
+          "points": 0
+        },
+        {
+          "name": "Logan Thompson",
+          "position": "G",
+          "wins": 1,
+          "shutouts": 0,
+          "otLosses": 0,
+          "points": 4
+        },
+        {
+          "name": "Jakub Dobes",
+          "position": "G",
+          "wins": 1,
+          "shutouts": 0,
+          "otLosses": 1,
+          "points": 5
+        }
+      ],
+      "teams": [
+        {
+          "name": "Canadiens de Montréal",
+          "abbrev": "MTL",
+          "reg_wins": 1,
+          "ot_wins": 0,
+          "ot_losses": 1,
+          "points": 4
+        },
+        {
+          "name": "Lightning de Tampa Bay",
+          "abbrev": "TBL",
+          "reg_wins": 2,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 6
+        },
+        {
+          "name": "Blue Jackets de Columbus",
+          "abbrev": "CBJ",
+          "reg_wins": 1,
+          "ot_wins": 0,
+          "ot_losses": 0,
+          "points": 3
+        },
+        {
+          "name": "Rangers de New York",
+          "abbrev": "NYR",
+          "reg_wins": 3,
+          "ot_wins": 0,
+          "ot_losses": 0,
+          "points": 9
         }
       ]
     },
     {
       "name": "Hak Jun Oh",
-      "total_points": 71,
+      "total_points": 88,
       "skaters": [
         {
           "name": "Nathan MacKinnon",
@@ -1731,266 +1731,46 @@
           "name": "Panthers de la Floride",
           "abbrev": "FLA",
           "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_wins": 1,
+          "ot_losses": 2,
+          "points": 4
         },
         {
           "name": "Oilers d'Edmonton",
           "abbrev": "EDM",
-          "reg_wins": 0,
+          "reg_wins": 2,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 7
         },
         {
           "name": "Devils du New Jersey",
           "abbrev": "NJD",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 1,
           "ot_losses": 0,
-          "points": 0
+          "points": 2
         },
         {
           "name": "Sharks de San Jose",
           "abbrev": "SJS",
           "reg_wins": 0,
-          "ot_wins": 0,
+          "ot_wins": 2,
           "ot_losses": 0,
-          "points": 0
-        }
-      ]
-    },
-    {
-      "name": "Nicolas St-Pierre",
-      "total_points": 66,
-      "skaters": [
-        {
-          "name": "Cale Makar",
-          "position": "D",
-          "goals": 1,
-          "assists": 2,
-          "points": 7
-        },
-        {
-          "name": "Quinn Hughes",
-          "position": "D",
-          "goals": 1,
-          "assists": 2,
-          "points": 7
-        },
-        {
-          "name": "David Pastrnak",
-          "position": "R",
-          "goals": 0,
-          "assists": 2,
-          "points": 2
-        },
-        {
-          "name": "Auston Matthews",
-          "position": "C",
-          "goals": 1,
-          "assists": 0,
-          "points": 2
-        },
-        {
-          "name": "William Nylander",
-          "position": "R",
-          "goals": 2,
-          "assists": 1,
-          "points": 5
-        },
-        {
-          "name": "Wyatt Johnston",
-          "position": "C",
-          "goals": 0,
-          "assists": 1,
-          "points": 1
-        },
-        {
-          "name": "Matthew Schaefer",
-          "position": "D",
-          "goals": 0,
-          "assists": 2,
           "points": 4
-        },
-        {
-          "name": "Aleksander Barkov",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Mitch Marner",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Adrian Kempe",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Zach Hyman",
-          "position": "L",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Leo Carlsson",
-          "position": "C",
-          "goals": 1,
-          "assists": 4,
-          "points": 6
-        },
-        {
-          "name": "Dylan Larkin",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Gavin McKenna",
-          "position": "L",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Juraj Slafkovský",
-          "position": "L",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Kirill Marchenko",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Jake Walman",
-          "position": "D",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Thomas Harley",
-          "position": "D",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Porter Martone",
-          "position": "R",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Matt Duchene",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Logan Stankoven",
-          "position": "C",
-          "goals": 1,
-          "assists": 0,
-          "points": 2
-        },
-        {
-          "name": "Oliver Kapanen",
-          "position": "C",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        }
-      ],
-      "goalies": [
-        {
-          "name": "Connor Hellebuyck",
-          "position": "G",
-          "wins": 0,
-          "shutouts": 0,
-          "otLosses": 0,
-          "points": 0
-        },
-        {
-          "name": "Jeremy Swayman",
-          "position": "G",
-          "wins": 2,
-          "shutouts": 1,
-          "otLosses": 0,
-          "points": 13
-        },
-        {
-          "name": "Jesper Wallstedt",
-          "position": "G",
-          "wins": 2,
-          "shutouts": 0,
-          "otLosses": 0,
-          "points": 8
-        }
-      ],
-      "teams": [
-        {
-          "name": "Stars de Dallas",
-          "abbrev": "DAL",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Lightning de Tampa Bay",
-          "abbrev": "TBL",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Islanders de New York",
-          "abbrev": "NYI",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
-        },
-        {
-          "name": "Sharks de San Jose",
-          "abbrev": "SJS",
-          "reg_wins": 0,
-          "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
         }
       ]
     },
     {
-      "name": "Aya el Khazen",
-      "total_points": 66,
+      "name": "Yanick Tremblay",
+      "total_points": 86,
       "skaters": [
         {
-          "name": "Nikita Kucherov",
-          "position": "R",
-          "goals": 1,
+          "name": "Nathan MacKinnon",
+          "position": "C",
+          "goals": 2,
           "assists": 3,
-          "points": 5
+          "points": 7
         },
         {
           "name": "Lane Hutson",
@@ -2007,11 +1787,11 @@
           "points": 2
         },
         {
-          "name": "Nick Suzuki",
-          "position": "C",
-          "goals": 1,
-          "assists": 3,
-          "points": 5
+          "name": "Charlie McAvoy",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
         },
         {
           "name": "Cole Caufield",
@@ -2021,18 +1801,18 @@
           "points": 4
         },
         {
-          "name": "Sidney Crosby",
-          "position": "C",
-          "goals": 0,
-          "assists": 2,
-          "points": 2
+          "name": "Miro Heiskanen",
+          "position": "D",
+          "goals": 2,
+          "assists": 0,
+          "points": 6
         },
         {
-          "name": "Matthew Schaefer",
-          "position": "D",
-          "goals": 0,
-          "assists": 2,
-          "points": 4
+          "name": "Mikko Rantanen",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
         },
         {
           "name": "Jackson LaCombe",
@@ -2042,32 +1822,32 @@
           "points": 4
         },
         {
-          "name": "John Carlson",
+          "name": "Mitch Marner",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Noah Dobson",
           "position": "D",
           "goals": 0,
-          "assists": 2,
-          "points": 4
+          "assists": 1,
+          "points": 2
         },
         {
-          "name": "Seth Jarvis",
-          "position": "R",
-          "goals": 0,
-          "assists": 0,
-          "points": 0
-        },
-        {
-          "name": "Clayton Keller",
-          "position": "R",
-          "goals": 0,
-          "assists": 5,
-          "points": 5
-        },
-        {
-          "name": "Brad Marchand",
+          "name": "Matthew Tkachuk",
           "position": "L",
           "goals": 1,
-          "assists": 0,
-          "points": 2
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Logan Cooley",
+          "position": "C",
+          "goals": 0,
+          "assists": 3,
+          "points": 3
         },
         {
           "name": "Rasmus Andersson",
@@ -2077,25 +1857,25 @@
           "points": 0
         },
         {
-          "name": "Ivan Demidov",
-          "position": "R",
-          "goals": 1,
-          "assists": 1,
-          "points": 3
-        },
-        {
-          "name": "Andrei Svechnikov",
-          "position": "R",
-          "goals": 0,
-          "assists": 3,
-          "points": 3
-        },
-        {
-          "name": "Bowen Byram",
+          "name": "Cole Hutson",
           "position": "D",
+          "goals": 1,
+          "assists": 0,
+          "points": 3
+        },
+        {
+          "name": "Juraj Slafkovský",
+          "position": "L",
           "goals": 0,
           "assists": 0,
           "points": 0
+        },
+        {
+          "name": "Matthew Knies",
+          "position": "L",
+          "goals": 2,
+          "assists": 2,
+          "points": 6
         },
         {
           "name": "Steven Stamkos",
@@ -2105,15 +1885,15 @@
           "points": 3
         },
         {
-          "name": "Thomas Harley",
-          "position": "D",
+          "name": "Jared McCann",
+          "position": "L",
           "goals": 0,
-          "assists": 0,
-          "points": 0
+          "assists": 4,
+          "points": 4
         },
         {
-          "name": "Anton Frondell",
-          "position": "C",
+          "name": "Jackson Blake",
+          "position": "R",
           "goals": 0,
           "assists": 2,
           "points": 2
@@ -2126,11 +1906,11 @@
           "points": 2
         },
         {
-          "name": "Zach Benson",
-          "position": "L",
+          "name": "Philip Broberg",
+          "position": "D",
           "goals": 0,
           "assists": 1,
-          "points": 1
+          "points": 2
         },
         {
           "name": "Alex Newhook",
@@ -2142,7 +1922,7 @@
       ],
       "goalies": [
         {
-          "name": "Sergei Bobrovsky",
+          "name": "Connor Hellebuyck",
           "position": "G",
           "wins": 0,
           "shutouts": 0,
@@ -2170,30 +1950,30 @@
         {
           "name": "Canadiens de Montréal",
           "abbrev": "MTL",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 4
         },
         {
-          "name": "Lightning de Tampa Bay",
-          "abbrev": "TBL",
-          "reg_wins": 0,
+          "name": "Oilers d'Edmonton",
+          "abbrev": "EDM",
+          "reg_wins": 2,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 7
         },
         {
-          "name": "Blue Jackets de Columbus",
-          "abbrev": "CBJ",
+          "name": "Kings de Los Angeles",
+          "abbrev": "LAK",
           "reg_wins": 0,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 1
         },
         {
-          "name": "Rangers de New York",
-          "abbrev": "NYR",
+          "name": "Flames de Calgary",
+          "abbrev": "CGY",
           "reg_wins": 0,
           "ot_wins": 0,
           "ot_losses": 0,
@@ -2203,7 +1983,7 @@
     },
     {
       "name": "Alexandre Neal",
-      "total_points": 66,
+      "total_points": 83,
       "skaters": [
         {
           "name": "Connor McDavid",
@@ -2390,34 +2170,254 @@
         {
           "name": "Canadiens de Montréal",
           "abbrev": "MTL",
-          "reg_wins": 0,
+          "reg_wins": 1,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 4
         },
         {
           "name": "Bruins de Boston",
           "abbrev": "BOS",
-          "reg_wins": 0,
-          "ot_wins": 0,
+          "reg_wins": 1,
+          "ot_wins": 1,
           "ot_losses": 0,
-          "points": 0
+          "points": 5
         },
         {
           "name": "Kings de Los Angeles",
           "abbrev": "LAK",
           "reg_wins": 0,
           "ot_wins": 0,
-          "ot_losses": 0,
-          "points": 0
+          "ot_losses": 1,
+          "points": 1
         },
         {
           "name": "Jets de Winnipeg",
           "abbrev": "WPG",
-          "reg_wins": 0,
+          "reg_wins": 2,
+          "ot_wins": 0,
+          "ot_losses": 1,
+          "points": 7
+        }
+      ]
+    },
+    {
+      "name": "Nicolas St-Pierre",
+      "total_points": 82,
+      "skaters": [
+        {
+          "name": "Cale Makar",
+          "position": "D",
+          "goals": 1,
+          "assists": 2,
+          "points": 7
+        },
+        {
+          "name": "Quinn Hughes",
+          "position": "D",
+          "goals": 1,
+          "assists": 2,
+          "points": 7
+        },
+        {
+          "name": "David Pastrnak",
+          "position": "R",
+          "goals": 0,
+          "assists": 2,
+          "points": 2
+        },
+        {
+          "name": "Auston Matthews",
+          "position": "C",
+          "goals": 1,
+          "assists": 0,
+          "points": 2
+        },
+        {
+          "name": "William Nylander",
+          "position": "R",
+          "goals": 2,
+          "assists": 1,
+          "points": 5
+        },
+        {
+          "name": "Wyatt Johnston",
+          "position": "C",
+          "goals": 0,
+          "assists": 1,
+          "points": 1
+        },
+        {
+          "name": "Matthew Schaefer",
+          "position": "D",
+          "goals": 0,
+          "assists": 2,
+          "points": 4
+        },
+        {
+          "name": "Aleksander Barkov",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Mitch Marner",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Adrian Kempe",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Zach Hyman",
+          "position": "L",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Leo Carlsson",
+          "position": "C",
+          "goals": 1,
+          "assists": 4,
+          "points": 6
+        },
+        {
+          "name": "Dylan Larkin",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Gavin McKenna",
+          "position": "L",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Juraj Slafkovský",
+          "position": "L",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Kirill Marchenko",
+          "position": "R",
+          "goals": 1,
+          "assists": 1,
+          "points": 3
+        },
+        {
+          "name": "Jake Walman",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Thomas Harley",
+          "position": "D",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Porter Martone",
+          "position": "R",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Matt Duchene",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        },
+        {
+          "name": "Logan Stankoven",
+          "position": "C",
+          "goals": 1,
+          "assists": 0,
+          "points": 2
+        },
+        {
+          "name": "Oliver Kapanen",
+          "position": "C",
+          "goals": 0,
+          "assists": 0,
+          "points": 0
+        }
+      ],
+      "goalies": [
+        {
+          "name": "Connor Hellebuyck",
+          "position": "G",
+          "wins": 0,
+          "shutouts": 0,
+          "otLosses": 0,
+          "points": 0
+        },
+        {
+          "name": "Jeremy Swayman",
+          "position": "G",
+          "wins": 2,
+          "shutouts": 1,
+          "otLosses": 0,
+          "points": 13
+        },
+        {
+          "name": "Jesper Wallstedt",
+          "position": "G",
+          "wins": 2,
+          "shutouts": 0,
+          "otLosses": 0,
+          "points": 8
+        }
+      ],
+      "teams": [
+        {
+          "name": "Stars de Dallas",
+          "abbrev": "DAL",
+          "reg_wins": 1,
           "ot_wins": 0,
           "ot_losses": 0,
-          "points": 0
+          "points": 3
+        },
+        {
+          "name": "Lightning de Tampa Bay",
+          "abbrev": "TBL",
+          "reg_wins": 2,
+          "ot_wins": 0,
+          "ot_losses": 0,
+          "points": 6
+        },
+        {
+          "name": "Islanders de New York",
+          "abbrev": "NYI",
+          "reg_wins": 1,
+          "ot_wins": 0,
+          "ot_losses": 0,
+          "points": 3
+        },
+        {
+          "name": "Sharks de San Jose",
+          "abbrev": "SJS",
+          "reg_wins": 0,
+          "ot_wins": 2,
+          "ot_losses": 0,
+          "points": 4
         }
       ]
     }
