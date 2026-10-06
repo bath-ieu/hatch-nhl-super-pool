@@ -63,11 +63,13 @@
                         </tr>`
                     ).join('');
 
+                    const displayScore = (typeof p.total_points === 'number') ? p.total_points : 0;
+
                     card.innerHTML = `
                         <div class="participant-header" onclick="toggleDetails(${index})">
                             <span class="rank">#${index + 1}</span>
                             <span class="name">${p.name}</span>
-                            <span class="score">${p.total_points !== undefined ? p.total_points : 0} PTS</span>
+                            <span class="score">${displayScore} PTS</span>
                         </div>
                         <div class="details" id="details-${index}">
                             <div class="section-title">Attaquants & Défenseurs</div>
@@ -93,7 +95,7 @@
                 });
             } catch (e) {
                 console.error(e);
-                document.getElementById('leaderboard').innerHTML = "<p style='text-align:center; color:#ef4444;'>Erreur lors du chargement des données. Assurez-vous que data.json est bien généré.</p>";
+                document.getElementById('leaderboard').innerHTML = "<p style='text-align:center; color:#ef4444;'>Erreur lors du chargement des données.</p>";
             }
         }
 
