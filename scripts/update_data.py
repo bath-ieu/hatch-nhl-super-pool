@@ -1,10 +1,8 @@
 import json
 import urllib.request
 
-# Saison ciblée : 2026-2027
 SEASON_ID = "20262027"
 
-# Configuration des 11 participants avec les IDs numériques de l'API LNH
 PARTICIPANTS = [
     {
         "name": "Jean-Philip Tremblay",
@@ -74,7 +72,6 @@ PARTICIPANTS = [
     }
 ]
 
-# Noms et abréviations des équipes
 TEAM_INFO = {
     8: {"name": "Canadiens de Montréal", "abbrev": "MTL"},
     25: {"name": "Stars de Dallas", "abbrev": "DAL"},
@@ -112,7 +109,7 @@ def main():
     standings_data = fetch_json("https://api-web.nhle.com/v1/standings/now")
     teams_stats = {}
     
-    # Valeurs initiales par défaut (0)
+    # Valeurs par défaut
     for tid, info in TEAM_INFO.items():
         teams_stats[tid] = {
             "name": info["name"],
@@ -123,15 +120,18 @@ def main():
             "points": 0
         }
 
+    # Extraction sécurisée des données d'équipes
     for team in standings_data.get('standings', []):
-        tid = team.get('teamId', {}).get('default')
+        raw_tid = team.get('teamId')
+        tid = raw_tid.get('default') if isinstance(raw_tid, dict) else raw_tid
+        
         if tid in teams_stats:
             reg_wins = team.get('regulationWins', 0)
             wins = team.get('wins', 0)
             ot_wins = max(0, wins - reg_wins)
             ot_losses = team.get('otLosses', 0)
             
-            # Formule : 3 pts reg win, 2 pts ot win, 1 pt ot loss
+            # Formule Équipes : 3 pts VR, 2 pts VP, 1 pt DP
             total_pts = (reg_wins * 3) + (ot_wins * 2) + (ot_losses * 1)
             
             teams_stats[tid]['reg_wins'] = reg_wins
@@ -163,10 +163,8 @@ def main():
                 stats_dict = sub
                 break
         
-        # Si vide dans seasonTotals, vérifier la section featuredStats
         if not stats_dict:
             featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
-            # Vérification si c'est bien la bonne saison
             if str(p_data.get('featuredStats', {}).get('season', '')) == SEASON_ID:
                 stats_dict = featured
 
@@ -175,7 +173,7 @@ def main():
             shutouts = stats_dict.get('shutouts', 0)
             ot_losses = stats_dict.get('otLosses', 0)
             
-            # Formule Gardiens: 4 pts V, 5 pts BL, 1 pt DP/DF
+            # Formule Gardiens : 4 pts V, 5 pts BL, 1 pt DP
             pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
                 "name": full_name,
@@ -189,7 +187,7 @@ def main():
             goals = stats_dict.get('goals', 0)
             assists = stats_dict.get('assists', 0)
             
-            # Formule D: 3 pts B, 2 pts P | Attaquants: 2 pts B, 1 pt P
+            # Formule D : 3 pts B, 2 pts P | Attaquants : 2 pts B, 1 pt P
             if pos == 'D':
                 pts = (goals * 3) + (assists * 2)
             else:
@@ -203,7 +201,7 @@ def main():
                 "points": pts
             }
 
-    # 3. Cumul des points pour chaque participant
+    # 3. Cumul strict des points par participant
     leaderboard = []
     for p in PARTICIPANTS:
         participant_score = 0
@@ -211,22 +209,19 @@ def main():
         goalie_details = []
         team_details = []
 
-        # Addition des patineurs
         for pid in p['skaters']:
             st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "goals": 0, "assists": 0, "position": "F"})
-            participant_score += st['points']
+            participant_score += st.get('points', 0)
             skater_details.append(st)
 
-        # Addition des gardiens
         for pid in p['goalies']:
             st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "wins": 0, "shutouts": 0, "otLosses": 0, "position": "G"})
-            participant_score += st['points']
+            participant_score += st.get('points', 0)
             goalie_details.append(st)
 
-        # Addition des équipes
         for tid in p['teams']:
             st = teams_stats.get(tid, {"name": f"Équipe {tid}", "points": 0, "reg_wins": 0, "ot_wins": 0, "ot_losses": 0})
-            participant_score += st['points']
+            participant_score += st.get('points', 0)
             team_details.append(st)
 
         leaderboard.append({
@@ -237,7 +232,6 @@ def main():
             "teams": team_details
         })
 
-    # Classement par ordre décroissant de points
     leaderboard.sort(key=lambda x: x['total_points'], reverse=True)
 
     output = {
