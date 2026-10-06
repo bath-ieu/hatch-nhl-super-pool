@@ -61,4 +61,183 @@ PARTICIPANTS = [
         "teams": [8, 6, 26, 52] # MTL, BOS, LAK, WPG
     },
     {
-        "name": "Antoine Duguay
+        "name": "Antoine Duguay",
+        "skaters": [8478402, 8480800, 8480027, 8480018, 8481540, 8482740, 8478403, 8477493, 8479420, 8480865, 8479314, 8476887, 8475166, 8484984, 8483515, 8481604, 8474564, 8477955, 8482809, 8475168, 8482702, 8481618],
+        "goalies": [8475683, 8478048, 8482487],
+        "teams": [21, 7, 26, 28] # COL, BUF, LAK, SJS
+    },
+    {
+        "name": "Hak Jun Oh",
+        "skaters": [8477492, 8484801, 8480839, 8483456, 8481540, 8478550, 8478420, 8477404, 8480801, 8476459, 8479314, 8476887, 8478397, 8486067, 8480830, 8480893, 8476462, 8481581, 8483495, 8478010, 8477346, 8482737],
+        "goalies": [8476883, 8475809, 8474593],
+        "teams": [13, 22, 1, 28] # FLA, EDM, NJD, SJS
+    }
+]
+
+# Noms et abréviations des équipes
+TEAM_INFO = {
+    8: {"name": "Canadiens de Montréal", "abbrev": "MTL"},
+    25: {"name": "Stars de Dallas", "abbrev": "DAL"},
+    12: {"name": "Hurricanes de la Caroline", "abbrev": "CAR"},
+    21: {"name": "Avalanche du Colorado", "abbrev": "COL"},
+    13: {"name": "Panthers de la Floride", "abbrev": "FLA"},
+    7: {"name": "Sabres de Buffalo", "abbrev": "BUF"},
+    14: {"name": "Lightning de Tampa Bay", "abbrev": "TBL"},
+    22: {"name": "Oilers d'Edmonton", "abbrev": "EDM"},
+    6: {"name": "Bruins de Boston", "abbrev": "BOS"},
+    1: {"name": "Devils du New Jersey", "abbrev": "NJD"},
+    2: {"name": "Islanders de New York", "abbrev": "NYI"},
+    29: {"name": "Blue Jackets de Columbus", "abbrev": "CBJ"},
+    4: {"name": "Flyers de Philadelphie", "abbrev": "PHI"},
+    5: {"name": "Penguins de Pittsburgh", "abbrev": "PIT"},
+    26: {"name": "Kings de Los Angeles", "abbrev": "LAK"},
+    52: {"name": "Jets de Winnipeg", "abbrev": "WPG"},
+    28: {"name": "Sharks de San Jose", "abbrev": "SJS"},
+    3: {"name": "Rangers de New York", "abbrev": "NYR"},
+    18: {"name": "Predators de Nashville", "abbrev": "NSH"},
+    20: {"name": "Flames de Calgary", "abbrev": "CGY"}
+}
+
+def fetch_json(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req) as response:
+            return json.loads(response.read().decode())
+    except Exception as e:
+        print(f"Erreur lors du téléchargement de {url}: {e}")
+        return {}
+
+def main():
+    # 1. Traitement des équipes
+    standings_data = fetch_json("https://api-web.nhle.com/v1/standings/now")
+    teams_stats = {}
+    
+    # Valeurs par défaut à 0
+    for tid, info in TEAM_INFO.items():
+        teams_stats[tid] = {
+            "name": info["name"],
+            "abbrev": info["abbrev"],
+            "reg_wins": 0,
+            "ot_wins": 0,
+            "ot_losses": 0,
+            "points": 0
+        }
+
+    for team in standings_data.get('standings', []):
+        tid = team.get('teamId', {}).get('default')
+        if tid in teams_stats:
+            reg_wins = team.get('regulationWins', 0)
+            wins = team.get('wins', 0)
+            ot_wins = max(0, wins - reg_wins)
+            ot_losses = team.get('otLosses', 0)
+            
+            # Formule: 3 pts reg win, 2 pts ot win, 1 pt ot loss
+            total_pts = (reg_wins * 3) + (ot_wins * 2) + (ot_losses * 1)
+            
+            teams_stats[tid]['reg_wins'] = reg_wins
+            teams_stats[tid]['ot_wins'] = ot_wins
+            teams_stats[tid]['ot_losses'] = ot_losses
+            teams_stats[tid]['points'] = total_pts
+
+    # 2. Traitement des joueurs
+    all_player_ids = set()
+    for p in PARTICIPANTS:
+        all_player_ids.update(p['skaters'])
+        all_player_ids.update(p['goalies'])
+
+    players_stats = {}
+    for pid in all_player_ids:
+        p_data = fetch_json(f"https://api-web.nhle.com/v1/player/{pid}/landing")
+        if not p_data:
+            continue
+            
+        pos = p_data.get('position', 'F')
+        first_name = p_data.get('firstName', {}).get('default', '')
+        last_name = p_data.get('lastName', {}).get('default', '')
+        full_name = f"{first_name} {last_name}".strip()
+        
+        # Extraction depuis featuredStats ou seasonTotals pour 2026-2027
+        featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
+        season_stats = {}
+        for sub in p_data.get('seasonTotals', []):
+            if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
+                season_stats = sub
+                break
+
+        if pos == 'G':
+            wins = featured.get('wins', season_stats.get('wins', 0))
+            shutouts = featured.get('shutouts', season_stats.get('shutouts', 0))
+            ot_losses = featured.get('otLosses', season_stats.get('otLosses', 0))
+            
+            # Formule: 4 pts V, 5 pts BL, 1 pt DP/DF
+            pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
+            players_stats[pid] = {
+                "name": full_name,
+                "position": "G",
+                "wins": wins,
+                "shutouts": shutouts,
+                "otLosses": ot_losses,
+                "points": pts
+            }
+        else:
+            goals = featured.get('goals', season_stats.get('goals', 0))
+            assists = featured.get('assists', season_stats.get('assists', 0))
+            
+            # Formule D: 3 pts B, 2 pts P | A: 2 pts B, 1 pt P
+            if pos == 'D':
+                pts = (goals * 3) + (assists * 2)
+            else:
+                pts = (goals * 2) + (assists * 1)
+                
+            players_stats[pid] = {
+                "name": full_name,
+                "position": pos,
+                "goals": goals,
+                "assists": assists,
+                "points": pts
+            }
+
+    # 3. Assemblage du classement
+    leaderboard = []
+    for p in PARTICIPANTS:
+        total_score = 0
+        skater_details = []
+        goalie_details = []
+        team_details = []
+
+        for pid in p['skaters']:
+            st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "goals": 0, "assists": 0, "position": "F"})
+            total_score += st['points']
+            skater_details.append(st)
+
+        for pid in p['goalies']:
+            st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "wins": 0, "shutouts": 0, "otLosses": 0, "position": "G"})
+            total_score += st['points']
+            goalie_details.append(st)
+
+        for tid in p['teams']:
+            st = teams_stats.get(tid, {"name": f"Équipe {tid}", "points": 0, "reg_wins": 0, "ot_wins": 0, "ot_losses": 0})
+            total_score += st['points']
+            team_details.append(st)
+
+        leaderboard.append({
+            "name": p['name'],
+            "total_points": total_score,
+            "skaters": skater_details,
+            "goalies": goalie_details,
+            "teams": team_details
+        })
+
+    # Tri décroissant par points
+    leaderboard.sort(key=lambda x: x['total_points'], reverse=True)
+
+    output = {
+        "season": SEASON_ID,
+        "leaderboard": leaderboard
+    }
+    
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
+if __name__ == "__main__":
+    main()
