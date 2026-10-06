@@ -30,7 +30,6 @@
     <script>
         async function loadPoolData() {
             try {
-                // Anti-cache pour assurer la lecture immédiate du data.json mis à jour
                 const res = await fetch('data.json?t=' + new Date().getTime());
                 const data = await res.json();
                 const container = document.getElementById('leaderboard');
@@ -68,7 +67,7 @@
                         <div class="participant-header" onclick="toggleDetails(${index})">
                             <span class="rank">#${index + 1}</span>
                             <span class="name">${p.name}</span>
-                            <span class="score">${p.total_points || 0} PTS</span>
+                            <span class="score">${p.total_points !== undefined ? p.total_points : 0} PTS</span>
                         </div>
                         <div class="details" id="details-${index}">
                             <div class="section-title">Attaquants & Défenseurs</div>
