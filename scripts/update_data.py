@@ -101,11 +101,11 @@ def fetch_json(url):
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read().decode())
     except Exception as e:
-        print(f"Erreur téléchargement {url}: {e}")
+        print(f"Erreur lors du téléchargement de {url}: {e}")
         return {}
 
 def main():
-    # 1. Classement des Équipes
+    # 1. Traitement du classement des Équipes
     standings_data = fetch_json("https://api-web.nhle.com/v1/standings/now")
     teams_stats = {}
     
@@ -120,12 +120,28 @@ def main():
             "points": 0
         }
 
-    # Extraction sécurisée des données d'équipes
+    # Table de correspondance de secours via l'abréviation
+    abbrev_to_id = {info["abbrev"]: tid for tid, info in TEAM_INFO.items()}
+
     for team in standings_data.get('standings', []):
+        # Récupération sécurisée du Team ID
         raw_tid = team.get('teamId')
-        tid = raw_tid.get('default') if isinstance(raw_tid, dict) else raw_tid
-        
-        if tid in teams_stats:
+        tid = None
+
+        if isinstance(raw_tid, dict):
+            tid = raw_tid.get('default')
+        elif isinstance(raw_tid, int):
+            tid = raw_tid
+
+        # Secours via l'abréviation si le teamId n'a pas pu être associé directement
+        if not tid or tid not in teams_stats:
+            raw_abbrev = team.get('teamAbbrev', {})
+            abbrev_str = raw_abbrev.get('default') if isinstance(raw_abbrev, dict) else raw_abbrev
+            if isinstance(abbrev_str, str) and abbrev_str in abbrev_to_id:
+                tid = abbrev_to_id[abbrev_str]
+
+        # Si l'équipe fait partie de la liste du pool
+        if tid and tid in teams_stats:
             reg_wins = team.get('regulationWins', 0)
             wins = team.get('wins', 0)
             ot_wins = max(0, wins - reg_wins)
@@ -139,7 +155,7 @@ def main():
             teams_stats[tid]['ot_losses'] = ot_losses
             teams_stats[tid]['points'] = total_pts
 
-    # 2. Statistiques des Joueurs
+    # 2. Traitement des Statistiques des Joueurs
     all_player_ids = set()
     for p in PARTICIPANTS:
         all_player_ids.update(p['skaters'])
@@ -201,7 +217,7 @@ def main():
                 "points": pts
             }
 
-    # 3. Cumul strict des points par participant
+    # 3. Cumul des points et préparation du classement
     leaderboard = []
     for p in PARTICIPANTS:
         participant_score = 0
