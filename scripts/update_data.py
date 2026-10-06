@@ -101,15 +101,14 @@ def fetch_json(url):
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read().decode())
     except Exception as e:
-        print(f"Erreur lors du téléchargement de {url}: {e}")
+        print(f"Erreur téléchargement {url}: {e}")
         return {}
 
 def main():
-    # 1. Traitement du classement des Équipes
+    # 1. Classement Équipes
     standings_data = fetch_json("https://api-web.nhle.com/v1/standings/now")
     teams_stats = {}
     
-    # Valeurs par défaut
     for tid, info in TEAM_INFO.items():
         teams_stats[tid] = {
             "name": info["name"],
@@ -120,34 +119,23 @@ def main():
             "points": 0
         }
 
-    # Table de correspondance de secours via l'abréviation
     abbrev_to_id = {info["abbrev"]: tid for tid, info in TEAM_INFO.items()}
 
     for team in standings_data.get('standings', []):
-        # Récupération sécurisée du Team ID
         raw_tid = team.get('teamId')
-        tid = None
+        tid = raw_tid.get('default') if isinstance(raw_tid, dict) else raw_tid
 
-        if isinstance(raw_tid, dict):
-            tid = raw_tid.get('default')
-        elif isinstance(raw_tid, int):
-            tid = raw_tid
-
-        # Secours via l'abréviation si le teamId n'a pas pu être associé directement
         if not tid or tid not in teams_stats:
             raw_abbrev = team.get('teamAbbrev', {})
             abbrev_str = raw_abbrev.get('default') if isinstance(raw_abbrev, dict) else raw_abbrev
             if isinstance(abbrev_str, str) and abbrev_str in abbrev_to_id:
                 tid = abbrev_to_id[abbrev_str]
 
-        # Si l'équipe fait partie de la liste du pool
         if tid and tid in teams_stats:
             reg_wins = team.get('regulationWins', 0)
             wins = team.get('wins', 0)
             ot_wins = max(0, wins - reg_wins)
             ot_losses = team.get('otLosses', 0)
-            
-            # Formule Équipes : 3 pts VR, 2 pts VP, 1 pt DP
             total_pts = (reg_wins * 3) + (ot_wins * 2) + (ot_losses * 1)
             
             teams_stats[tid]['reg_wins'] = reg_wins
@@ -155,7 +143,7 @@ def main():
             teams_stats[tid]['ot_losses'] = ot_losses
             teams_stats[tid]['points'] = total_pts
 
-    # 2. Traitement des Statistiques des Joueurs
+    # 2. Stats Joueurs
     all_player_ids = set()
     for p in PARTICIPANTS:
         all_player_ids.update(p['skaters'])
@@ -167,12 +155,14 @@ def main():
         if not p_data:
             continue
             
-        pos = p_data.get('position', 'F')
+        raw_pos = p_data.get('position', 'F')
+        # Standardisation de la position en A, D ou G
+        pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
+        
         first_name = p_data.get('firstName', {}).get('default', '')
         last_name = p_data.get('lastName', {}).get('default', '')
         full_name = f"{first_name} {last_name}".strip()
         
-        # Récupération des stats de la saison régulière 2026-2027
         stats_dict = {}
         for sub in p_data.get('seasonTotals', []):
             if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
@@ -188,8 +178,6 @@ def main():
             wins = stats_dict.get('wins', 0)
             shutouts = stats_dict.get('shutouts', 0)
             ot_losses = stats_dict.get('otLosses', 0)
-            
-            # Formule Gardiens : 4 pts V, 5 pts BL, 1 pt DP
             pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
                 "name": full_name,
@@ -202,12 +190,7 @@ def main():
         else:
             goals = stats_dict.get('goals', 0)
             assists = stats_dict.get('assists', 0)
-            
-            # Formule D : 3 pts B, 2 pts P | Attaquants : 2 pts B, 1 pt P
-            if pos == 'D':
-                pts = (goals * 3) + (assists * 2)
-            else:
-                pts = (goals * 2) + (assists * 1)
+            pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 2) + (assists * 1)
                 
             players_stats[pid] = {
                 "name": full_name,
@@ -217,32 +200,45 @@ def main():
                 "points": pts
             }
 
-    # 3. Cumul des points et préparation du classement
+    # 3. Cumul par participant avec sous-totaux (Att, Def, Goaler, Equipe)
     leaderboard = []
     for p in PARTICIPANTS:
-        participant_score = 0
+        att_pts = 0
+        def_pts = 0
+        goalie_pts = 0
+        team_pts = 0
+
         skater_details = []
         goalie_details = []
         team_details = []
 
         for pid in p['skaters']:
-            st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "goals": 0, "assists": 0, "position": "F"})
-            participant_score += st.get('points', 0)
+            st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "goals": 0, "assists": 0, "position": "A"})
+            if st.get('position') == 'D':
+                def_pts += st.get('points', 0)
+            else:
+                att_pts += st.get('points', 0)
             skater_details.append(st)
 
         for pid in p['goalies']:
             st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "wins": 0, "shutouts": 0, "otLosses": 0, "position": "G"})
-            participant_score += st.get('points', 0)
+            goalie_pts += st.get('points', 0)
             goalie_details.append(st)
 
         for tid in p['teams']:
             st = teams_stats.get(tid, {"name": f"Équipe {tid}", "points": 0, "reg_wins": 0, "ot_wins": 0, "ot_losses": 0})
-            participant_score += st.get('points', 0)
+            team_pts += st.get('points', 0)
             team_details.append(st)
+
+        total_points = att_pts + def_pts + goalie_pts + team_pts
 
         leaderboard.append({
             "name": p['name'],
-            "total_points": participant_score,
+            "total_points": total_points,
+            "att_pts": att_pts,
+            "def_pts": def_pts,
+            "goalie_pts": goalie_pts,
+            "team_pts": team_pts,
             "skaters": skater_details,
             "goalies": goalie_details,
             "teams": team_details
