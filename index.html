@@ -11,6 +11,8 @@
             --text-dark: #2c3e50;
             --bg-page: #ffffff;
             --bg-details: #f8fafc;
+            --green-arrow: #22c55e;
+            --red-arrow: #ef4444;
         }
 
         body { 
@@ -36,53 +38,61 @@
             font-weight: 800;
         }
 
-        /* --- STYLES DES PASTILLES --- */
         .participant-card {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
-        .pill-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        /* Cercle de rang à gauche avec le signe # et numéro plus gros */
-        .rank-circle {
-            width: clamp(60px, 9vw, 85px);
-            height: clamp(60px, 9vw, 85px);
-            min-width: clamp(60px, 9vw, 85px);
-            border-radius: 50%;
-            background-color: #ffffff;
-            border: 4px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(1.5rem, 4vw, 2.6rem);
-            font-weight: 800;
-            color: var(--accent-red);
-            box-sizing: border-box;
-            line-height: 1;
-        }
-
-        /* Pastille principale s'étendant sur la largeur restante */
+        /* --- PASTILLE UNIQUE PLEINE LARGEUR --- */
         .main-pill {
-            flex-grow: 1;
+            width: 100%;
             background-color: #ffffff;
             border: 4px solid var(--border-color);
             border-radius: 50px;
-            padding: 10px clamp(12px, 3vw, 28px);
+            padding: 10px clamp(14px, 3.5vw, 32px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-sizing: border-box;
-            min-height: clamp(70px, 10vw, 90px);
-            gap: 15px;
+            min-height: clamp(75px, 10vw, 95px);
+            cursor: pointer;
+            gap: clamp(10px, 2.5vw, 25px);
         }
 
+        /* Section Position & Flèche de tendance */
+        .rank-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .rank-number {
+            font-size: clamp(1.6rem, 4vw, 2.7rem);
+            font-weight: 900;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+
+        .trend-arrow {
+            font-size: clamp(0.9rem, 2vw, 1.4rem);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .trend-arrow.up {
+            color: var(--green-arrow);
+        }
+
+        .trend-arrow.down {
+            color: var(--red-arrow);
+        }
+
+        .trend-arrow.same {
+            display: none;
+        }
+
+        /* Information Participant & Breakdown */
         .participant-info {
             display: flex;
             flex-direction: column;
@@ -98,11 +108,10 @@
             line-height: 1.1;
         }
 
-        /* Division des points espacée selon la largeur */
         .points-breakdown {
             display: flex;
             justify-content: flex-start;
-            gap: clamp(12px, 4vw, 40px);
+            gap: clamp(12px, 4vw, 45px);
             width: 100%;
         }
 
@@ -120,7 +129,7 @@
         }
 
         .breakdown-value {
-            font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+            font-size: clamp(0.8rem, 1.6vw, 1.15rem);
             color: var(--accent-red);
             font-weight: 800;
         }
@@ -155,7 +164,7 @@
             line-height: 1;
         }
 
-        /* --- SECTION DÉTAILS DÉROULANTE (Fond clair) --- */
+        /* --- DÉTAILS DÉROULANTS --- */
         .details {
             display: none;
             background: var(--bg-details);
@@ -173,8 +182,7 @@
         .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; background: #e2e8f0; color: #334155; }
 
         @media (max-width: 520px) {
-            .pill-wrapper { gap: 8px; }
-            .main-pill { padding: 8px 10px; }
+            .main-pill { padding: 8px 12px; }
             .points-breakdown { gap: 10px; }
         }
     </style>
@@ -222,35 +230,46 @@
                         </tr>`
                     ).join('');
 
+                    // Gestion de la flèche de tendance
+                    let trendHtml = '';
+                    if (p.trend === 'up') {
+                        trendHtml = '<span class="trend-arrow up" title="En hausse par rapport à la veille">▲</span>';
+                    } else if (p.trend === 'down') {
+                        trendHtml = '<span class="trend-arrow down" title="En baisse par rapport à la veille">▼</span>';
+                    }
+
                     card.innerHTML = `
-                        <div class="pill-wrapper" onclick="toggleDetails(${index})">
-                            <div class="rank-circle">#${index + 1}</div>
-                            <div class="main-pill">
-                                <div class="participant-info">
-                                    <div class="participant-name">${p.name}</div>
-                                    <div class="points-breakdown">
-                                        <div class="breakdown-item">
-                                            <span class="breakdown-label">Att</span>
-                                            <span class="breakdown-value">${p.att_pts || 0}</span>
-                                        </div>
-                                        <div class="breakdown-item">
-                                            <span class="breakdown-label">Def</span>
-                                            <span class="breakdown-value">${p.def_pts || 0}</span>
-                                        </div>
-                                        <div class="breakdown-item">
-                                            <span class="breakdown-label">Goaler</span>
-                                            <span class="breakdown-value">${p.goalie_pts || 0}</span>
-                                        </div>
-                                        <div class="breakdown-item">
-                                            <span class="breakdown-label">Equipe</span>
-                                            <span class="breakdown-value">${p.team_pts || 0}</span>
-                                        </div>
+                        <div class="main-pill" onclick="toggleDetails(${index})">
+                            <div class="rank-section">
+                                <span class="rank-number">#${index + 1}</span>
+                                ${trendHtml}
+                            </div>
+                            
+                            <div class="participant-info">
+                                <div class="participant-name">${p.name}</div>
+                                <div class="points-breakdown">
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Att</span>
+                                        <span class="breakdown-value">${p.att_pts || 0}</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Def</span>
+                                        <span class="breakdown-value">${p.def_pts || 0}</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Goaler</span>
+                                        <span class="breakdown-value">${p.goalie_pts || 0}</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="breakdown-label">Equipe</span>
+                                        <span class="breakdown-value">${p.team_pts || 0}</span>
                                     </div>
                                 </div>
-                                <div class="total-circle">
-                                    <span class="total-label">TOTAL</span>
-                                    <span class="total-points">${p.total_points || 0} pts</span>
-                                </div>
+                            </div>
+
+                            <div class="total-circle">
+                                <span class="total-label">TOTAL</span>
+                                <span class="total-points">${p.total_points || 0} pts</span>
                             </div>
                         </div>
 
