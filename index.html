@@ -16,8 +16,8 @@
 
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            /* Dégradé du blanc (#ffffff) vers un bleu/gris pâle (#e2e8f0) vers le bas */
-            background: linear-gradient(180deg, #ffffff 0%, #edf2f7 50%, #e2e8f0 100%);
+            /* Gris du dégradé assombri */
+            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);
             background-attachment: fixed;
             color: var(--text-dark); 
             margin: 0; 
@@ -39,32 +39,37 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 35px;
-            gap: 15px;
+            width: 100%;
         }
 
+        /* Le bloc marque prend exactement 75% (3/4) de la largeur des pastilles */
         .brand-block {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: min(100%, 380px); /* Ajuste la largeur commune du logo et du titre */
+            width: 75%;
+            margin: 0 auto;
         }
 
+        /* Le logo occupe toute la largeur du brand-block (soit 3/4 de la pastille) */
         .hatch-logo {
             width: 100%;
             height: auto;
-            max-height: 90px;
             object-fit: contain;
             display: block;
         }
 
+        /* Le titre prend 75% de la largeur du logo, centré, avec marge négative pour remonter sur l'image */
         h1 { 
             text-align: center; 
             color: var(--text-dark); 
-            font-size: clamp(1.5rem, 4.5vw, 2.3rem); 
-            margin: 10px 0 0 0; 
+            font-size: clamp(1.1rem, 3.2vw, 2rem); 
+            margin: -15px auto 0 auto; 
             font-weight: 800;
-            width: 100%;
+            width: 75%;
             white-space: nowrap;
+            position: relative;
+            z-index: 2;
         }
 
         .participant-card {
@@ -89,7 +94,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
-        /* Section Position & Flèche de tendance */
         .rank-section {
             display: flex;
             align-items: center;
@@ -110,19 +114,10 @@
             line-height: 1;
         }
 
-        .trend-arrow.up {
-            color: var(--green-arrow);
-        }
+        .trend-arrow.up { color: var(--green-arrow); }
+        .trend-arrow.down { color: var(--red-arrow); }
+        .trend-arrow.same { display: none; }
 
-        .trend-arrow.down {
-            color: var(--red-arrow);
-        }
-
-        .trend-arrow.same {
-            display: none;
-        }
-
-        /* Information Participant & Breakdown */
         .participant-info {
             display: flex;
             flex-direction: column;
@@ -164,7 +159,6 @@
             font-weight: 800;
         }
 
-        /* Cercle TOTAL à droite */
         .total-circle {
             width: clamp(60px, 9vw, 80px);
             height: clamp(60px, 9vw, 80px);
@@ -194,7 +188,6 @@
             line-height: 1;
         }
 
-        /* --- DÉTAILS DÉROULANTS --- */
         .details {
             display: none;
             background: var(--bg-details);
@@ -214,8 +207,7 @@
         @media (max-width: 520px) {
             .main-pill { padding: 8px 12px; }
             .points-breakdown { gap: 10px; }
-            .brand-block { width: min(100%, 280px); }
-            h1 { font-size: 1.3rem; }
+            h1 { margin-top: -10px; }
         }
     </style>
 </head>
@@ -223,7 +215,7 @@
     <div class="container">
         <header class="header">
             <div class="brand-block">
-                <img src="./images/hatch-logo.png" alt="Logo Hatch" class="hatch-logo">
+                <img src="./images/hatch-logo.png" alt="Hatch Logo" class="hatch-logo">
                 <h1>🏒 NHL Super Pool 🥅</h1>
             </div>
         </header>
@@ -268,7 +260,6 @@
                         </tr>`
                     ).join('');
 
-                    // Gestion de la flèche de tendance
                     let trendHtml = '';
                     if (p.trend === 'up') {
                         trendHtml = '<span class="trend-arrow up" title="En hausse par rapport à la veille">▲</span>';
