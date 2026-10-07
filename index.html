@@ -18,6 +18,9 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             background-color: var(--bg-page); 
+            /* Arrière-plan épuré avec petits signes "plus" arrondis couleur orange/rouge */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="%23e0564c" fill-opacity="0.18"><rect x="10" y="6" width="4" height="12" rx="2"/><rect x="6" y="10" width="12" height="4" rx="2"/><rect x="40" y="36" width="4" height="12" rx="2"/><rect x="36" y="40" width="12" height="4" rx="2"/></g></svg>');
+            background-repeat: repeat;
             color: var(--text-dark); 
             margin: 0; 
             padding: 20px 15px; 
@@ -70,7 +73,7 @@
         .rank-number {
             font-size: clamp(1.6rem, 4vw, 2.7rem);
             font-weight: 900;
-            color: var(--border-color); /* MÊME COULEUR QUE LE CONTOUR DE LA PASTILLE */
+            color: var(--border-color);
             line-height: 1;
         }
 
