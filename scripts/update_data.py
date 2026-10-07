@@ -2,15 +2,13 @@ import json
 import os
 import urllib.request
 
+# Saison courante 2026-2027
 SEASON_ID = "20262027"
 
-# Correction explicite des positions
+# Surcharge de position pour les cas spécifiques de l'API
 POSITION_OVERRIDES = {
-    8474578: "D"  # Erik Karlsson est bien Défenseur
+    8474578: "D"  # Erik Karlsson = Défenseur
 }
-
-# IDs autorisés à utiliser un fallback si la saison courante n'est pas disponible
-FALLBACK_ALLOWED_IDS = {8474578, 8481559}
 
 PARTICIPANTS = [
     {
@@ -171,7 +169,6 @@ def main():
             
         raw_pos = p_data.get('position', 'F')
         
-        # Surcharge explicite de la position si le joueur est dans POSITION_OVERRIDES
         if pid in POSITION_OVERRIDES:
             pos = POSITION_OVERRIDES[pid]
         else:
@@ -183,25 +180,23 @@ def main():
         
         stats_dict = {}
         
-        # 1. Recherche STRICTE de la saison courante dans seasonTotals
-        for sub in p_data.get('seasonTotals', []):
-            if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
-                stats_dict = sub
-                break
+        # 1. Tenter d'abord de lire featuredStats si la saison courante y est active
+        featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
+        feat_season = str(p_data.get('featuredStats', {}).get('season', ''))
         
-        # 2. Recherche alternative via featuredStats si la saison courante y figure
-        if not stats_dict:
-            featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
-            feat_season = str(p_data.get('featuredStats', {}).get('season', ''))
-            if feat_season == SEASON_ID:
-                stats_dict = featured
+        if featured and feat_season == SEASON_ID:
+            stats_dict = featured
 
-        # 3. UNIQUMENT pour Erik Karlsson et Jack Hughes : secours si les données courantes sont introuvables
-        if not stats_dict and pid in FALLBACK_ALLOWED_IDS:
-            if p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason'):
-                stats_dict = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason')
-            elif p_data.get('seasonTotals'):
-                stats_dict = p_data.get('seasonTotals')[-1]
+        # 2. Chercher dans seasonTotals STRICTEMENT la saison SEASON_ID
+        if not stats_dict:
+            for sub in p_data.get('seasonTotals', []):
+                if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
+                    stats_dict = sub
+                    break
+
+        # 3. Fallback direct sur featuredStats si présent (au cas où season == SEASON_ID n'était pas renseigné dans featuredStats)
+        if not stats_dict and featured:
+            stats_dict = featured
 
         if pos == 'G':
             wins = stats_dict.get('wins', 0) or 0
