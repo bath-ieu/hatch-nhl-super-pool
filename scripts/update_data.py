@@ -4,6 +4,11 @@ import urllib.request
 
 SEASON_ID = "20262027"
 
+# Correction explicite des positions pour les cas particuliers de l'API LNH
+POSITION_OVERRIDES = {
+    8474578: "D"  # Erik Karlsson est bien Défenseur
+}
+
 PARTICIPANTS = [
     {
         "name": "Jean-Philip Tremblay",
@@ -106,7 +111,6 @@ def fetch_json(url):
         return {}
 
 def main():
-    # Récupérer l'ancien classement pour calculer la tendance (montée/descente)
     previous_ranks = {}
     if os.path.exists("data.json"):
         try:
@@ -163,35 +167,48 @@ def main():
             continue
             
         raw_pos = p_data.get('position', 'F')
-        pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
+        
+        # Surcharge explicite si le joueur est spécifié dans POSITION_OVERRIDES
+        if pid in POSITION_OVERRIDES:
+            pos = POSITION_OVERRIDES[pid]
+        else:
+            pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
         
         first_name = p_data.get('firstName', {}).get('default', '')
         last_name = p_data.get('lastName', {}).get('default', '')
         full_name = f"{first_name} {last_name}".strip()
         
         stats_dict = {}
+        
+        # 1. Recherche par saison régulière correspondante
         for sub in p_data.get('seasonTotals', []):
             if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
                 stats_dict = sub
                 break
         
+        # 2. Recherche alternative via featuredStats
         if not stats_dict:
             featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
-            if str(p_data.get('featuredStats', {}).get('season', '')) == SEASON_ID:
+            feat_season = str(p_data.get('featuredStats', {}).get('season', ''))
+            if feat_season == SEASON_ID or not feat_season:
                 stats_dict = featured
 
+        # 3. Dernier recours : prendre le dernier enregistrement disponible dans seasonTotals
+        if not stats_dict and p_data.get('seasonTotals'):
+            stats_dict = p_data.get('seasonTotals')[-1]
+
         if pos == 'G':
-            wins = stats_dict.get('wins', 0)
-            shutouts = stats_dict.get('shutouts', 0)
-            ot_losses = stats_dict.get('otLosses', 0)
+            wins = stats_dict.get('wins', 0) or 0
+            shutouts = stats_dict.get('shutouts', 0) or 0
+            ot_losses = stats_dict.get('otLosses', 0) or 0
             pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
                 "name": full_name, "position": "G",
                 "wins": wins, "shutouts": shutouts, "otLosses": ot_losses, "points": pts
             }
         else:
-            goals = stats_dict.get('goals', 0)
-            assists = stats_dict.get('assists', 0)
+            goals = stats_dict.get('goals', 0) or 0
+            assists = stats_dict.get('assists', 0) or 0
             pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 2) + (assists * 1)
             players_stats[pid] = {
                 "name": full_name, "position": pos,
@@ -244,10 +261,8 @@ def main():
         if old_rank is None or old_rank == new_rank:
             p["trend"] = "same"
         elif new_rank < old_rank:
-            # Nouveau rang plus petit = le participant a monté
             p["trend"] = "up"
         else:
-            # Nouveau rang plus grand = le participant a descendu
             p["trend"] = "down"
 
     output = {
