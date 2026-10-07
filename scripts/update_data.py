@@ -4,10 +4,13 @@ import urllib.request
 
 SEASON_ID = "20262027"
 
-# Correction explicite des positions pour les cas particuliers de l'API LNH
+# Correction explicite des positions
 POSITION_OVERRIDES = {
     8474578: "D"  # Erik Karlsson est bien Défenseur
 }
+
+# IDs autorisés à utiliser un fallback si la saison courante n'est pas disponible
+FALLBACK_ALLOWED_IDS = {8474578, 8481559}
 
 PARTICIPANTS = [
     {
@@ -168,7 +171,7 @@ def main():
             
         raw_pos = p_data.get('position', 'F')
         
-        # Surcharge explicite si le joueur est spécifié dans POSITION_OVERRIDES
+        # Surcharge explicite de la position si le joueur est dans POSITION_OVERRIDES
         if pid in POSITION_OVERRIDES:
             pos = POSITION_OVERRIDES[pid]
         else:
@@ -180,22 +183,25 @@ def main():
         
         stats_dict = {}
         
-        # 1. Recherche par saison régulière correspondante
+        # 1. Recherche STRICTE de la saison courante dans seasonTotals
         for sub in p_data.get('seasonTotals', []):
             if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
                 stats_dict = sub
                 break
         
-        # 2. Recherche alternative via featuredStats
+        # 2. Recherche alternative via featuredStats si la saison courante y figure
         if not stats_dict:
             featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
             feat_season = str(p_data.get('featuredStats', {}).get('season', ''))
-            if feat_season == SEASON_ID or not feat_season:
+            if feat_season == SEASON_ID:
                 stats_dict = featured
 
-        # 3. Dernier recours : prendre le dernier enregistrement disponible dans seasonTotals
-        if not stats_dict and p_data.get('seasonTotals'):
-            stats_dict = p_data.get('seasonTotals')[-1]
+        # 3. UNIQUMENT pour Erik Karlsson et Jack Hughes : secours si les données courantes sont introuvables
+        if not stats_dict and pid in FALLBACK_ALLOWED_IDS:
+            if p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason'):
+                stats_dict = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason')
+            elif p_data.get('seasonTotals'):
+                stats_dict = p_data.get('seasonTotals')[-1]
 
         if pos == 'G':
             wins = stats_dict.get('wins', 0) or 0
