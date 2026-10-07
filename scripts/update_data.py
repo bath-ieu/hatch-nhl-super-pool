@@ -143,6 +143,7 @@ def main():
             wins = team.get('wins', 0)
             ot_wins = max(0, wins - reg_wins)
             ot_losses = team.get('otLosses', 0)
+            # 3 pts Victoire Rég., 2 pts Victoire Prol., 1 pt Défaite Prol.
             total_pts = (reg_wins * 3) + (ot_wins * 2) + (ot_losses * 1)
             
             teams_stats[tid]['reg_wins'] = reg_wins
@@ -184,7 +185,8 @@ def main():
             wins = stats_dict.get('wins', 0)
             shutouts = stats_dict.get('shutouts', 0)
             ot_losses = stats_dict.get('otLosses', 0)
-            pts = (wins * 2) + (shutouts * 3) + (ot_losses * 1)
+            # Gardiens : 4 pts/victoire, 5 pts/blanchissage, 1 pt/défaite en prolongation
+            pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
                 "name": full_name, "position": "G",
                 "wins": wins, "shutouts": shutouts, "otLosses": ot_losses, "points": pts
@@ -192,7 +194,8 @@ def main():
         else:
             goals = stats_dict.get('goals', 0)
             assists = stats_dict.get('assists', 0)
-            pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 1) + (assists * 1)
+            # Défenseurs : 3 pts/but, 2 pts/passe | Attaquants : 2 pts/but, 1 pt/passe
+            pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 2) + (assists * 1)
             players_stats[pid] = {
                 "name": full_name, "position": pos,
                 "goals": goals, "assists": assists, "points": pts
@@ -244,10 +247,8 @@ def main():
         if old_rank is None or old_rank == new_rank:
             p["trend"] = "same"
         elif new_rank < old_rank:
-            # Nouveau rang plus petit = le participant a monté
             p["trend"] = "up"
         else:
-            # Nouveau rang plus grand = le participant a descendu
             p["trend"] = "down"
 
     output = {
