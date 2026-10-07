@@ -41,31 +41,36 @@
             gap: 15px;
         }
 
+        /* Le bloc marque prend exactement 75% (3/4) de la largeur des pastilles */
         .brand-block {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: min(100%, 380px);
+            width: 75%;
+            margin: 0 auto;
         }
-
+ 
+        /* Le logo occupe toute la largeur du brand-block (soit 3/4 de la pastille) */
         .hatch-logo {
             width: 100%;
             height: auto;
-            max-height: 90px;
             object-fit: contain;
             display: block;
         }
-
+ 
+        /* Le titre prend 75% de la largeur du logo, centré, avec marge négative pour remonter sur l'image */
         h1 { 
             text-align: center; 
             color: var(--text-dark); 
-            font-size: clamp(1.5rem, 4.5vw, 2.3rem); 
-            margin: 10px 0 0 0; 
+            font-size: clamp(1.1rem, 3.2vw, 2rem); 
+            margin: -15px auto 0 auto; 
             font-weight: 800;
-            width: 100%;
+            width: 75%;
             white-space: nowrap;
+            position: relative;
+            z-index: 2;
         }
-
+ 
         .participant-card {
             margin-bottom: 20px;
             width: 100%;
