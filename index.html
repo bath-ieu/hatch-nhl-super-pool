@@ -32,11 +32,27 @@
             box-sizing: border-box;
         }
 
+        /* En-tête avec Logo Hatch et Titre */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .hatch-logo {
+            max-height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
         h1 { 
             text-align: center; 
             color: var(--text-dark); 
             font-size: clamp(1.6rem, 4vw, 2.4rem); 
-            margin-bottom: 30px; 
+            margin: 0; 
             font-weight: 800;
         }
 
@@ -187,12 +203,17 @@
         @media (max-width: 520px) {
             .main-pill { padding: 8px 12px; }
             .points-breakdown { gap: 10px; }
+            .hatch-logo { max-height: 40px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏒 Hatch NHL Super Pool (2026-2027)</h1>
+        <header class="header">
+            <img src="https://seeklogo.com/images/H/hatch-logo-319345-seeklogo.com.png" alt="Hatch Ltd" class="hatch-logo">
+            <h1>🏒 NHL Super Pool (2026-2027)</h1>
+        </header>
+
         <div id="leaderboard">Chargement du classement...</div>
     </div>
 
