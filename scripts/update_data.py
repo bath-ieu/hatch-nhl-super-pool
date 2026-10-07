@@ -1,4 +1,5 @@
 import json
+import os
 import urllib.request
 
 SEASON_ID = "20262027"
@@ -105,18 +106,24 @@ def fetch_json(url):
         return {}
 
 def main():
+    # Récupérer l'ancien classement pour calculer la tendance (montée/descente)
+    previous_ranks = {}
+    if os.path.exists("data.json"):
+        try:
+            with open("data.json", "r", encoding="utf-8") as f:
+                old_data = json.load(f)
+                for rank, item in enumerate(old_data.get("leaderboard", []), start=1):
+                    previous_ranks[item["name"]] = rank
+        except Exception as e:
+            print(f"Impossible de lire data.json existant: {e}")
+
     # 1. Classement Équipes
     standings_data = fetch_json("https://api-web.nhle.com/v1/standings/now")
     teams_stats = {}
-    
     for tid, info in TEAM_INFO.items():
         teams_stats[tid] = {
-            "name": info["name"],
-            "abbrev": info["abbrev"],
-            "reg_wins": 0,
-            "ot_wins": 0,
-            "ot_losses": 0,
-            "points": 0
+            "name": info["name"], "abbrev": info["abbrev"],
+            "reg_wins": 0, "ot_wins": 0, "ot_losses": 0, "points": 0
         }
 
     abbrev_to_id = {info["abbrev"]: tid for tid, info in TEAM_INFO.items()}
@@ -156,7 +163,6 @@ def main():
             continue
             
         raw_pos = p_data.get('position', 'F')
-        # Standardisation de la position en A, D ou G
         pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
         
         first_name = p_data.get('firstName', {}).get('default', '')
@@ -180,37 +186,23 @@ def main():
             ot_losses = stats_dict.get('otLosses', 0)
             pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
-                "name": full_name,
-                "position": "G",
-                "wins": wins,
-                "shutouts": shutouts,
-                "otLosses": ot_losses,
-                "points": pts
+                "name": full_name, "position": "G",
+                "wins": wins, "shutouts": shutouts, "otLosses": ot_losses, "points": pts
             }
         else:
             goals = stats_dict.get('goals', 0)
             assists = stats_dict.get('assists', 0)
             pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 2) + (assists * 1)
-                
             players_stats[pid] = {
-                "name": full_name,
-                "position": pos,
-                "goals": goals,
-                "assists": assists,
-                "points": pts
+                "name": full_name, "position": pos,
+                "goals": goals, "assists": assists, "points": pts
             }
 
-    # 3. Cumul par participant avec sous-totaux (Att, Def, Goaler, Equipe)
+    # 3. Cumul par participant
     leaderboard = []
     for p in PARTICIPANTS:
-        att_pts = 0
-        def_pts = 0
-        goalie_pts = 0
-        team_pts = 0
-
-        skater_details = []
-        goalie_details = []
-        team_details = []
+        att_pts, def_pts, goalie_pts, team_pts = 0, 0, 0, 0
+        skater_details, goalie_details, team_details = [], [], []
 
         for pid in p['skaters']:
             st = players_stats.get(pid, {"name": f"ID {pid}", "points": 0, "goals": 0, "assists": 0, "position": "A"})
@@ -245,6 +237,18 @@ def main():
         })
 
     leaderboard.sort(key=lambda x: x['total_points'], reverse=True)
+
+    # Calcul des tendances
+    for new_rank, p in enumerate(leaderboard, start=1):
+        old_rank = previous_ranks.get(p["name"])
+        if old_rank is None or old_rank == new_rank:
+            p["trend"] = "same"
+        elif new_rank < old_rank:
+            # Nouveau rang plus petit = le participant a monté
+            p["trend"] = "up"
+        else:
+            # Nouveau rang plus grand = le participant a descendu
+            p["trend"] = "down"
 
     output = {
         "season": SEASON_ID,
