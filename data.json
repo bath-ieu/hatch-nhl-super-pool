@@ -899,7 +899,7 @@
           "points": 4
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Alain Roy",
@@ -1124,7 +1124,7 @@
           "points": 4
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Alondra Rima",
@@ -1349,7 +1349,7 @@
           "points": 4
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Aya el Khazen",
@@ -1574,7 +1574,7 @@
           "points": 12
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Jean-Philip Tremblay",
@@ -2249,7 +2249,7 @@
           "points": 0
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Nicolas St-Pierre",
@@ -2474,7 +2474,7 @@
           "points": 4
         }
       ],
-      "trend": "down"
+      "trend": "same"
     }
   ]
 }
