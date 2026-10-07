@@ -2,13 +2,7 @@ import json
 import os
 import urllib.request
 
-# Saison courante 2026-2027
 SEASON_ID = "20262027"
-
-# Surcharge de position pour les cas spécifiques de l'API
-POSITION_OVERRIDES = {
-    8474578: "D"  # Erik Karlsson = Défenseur
-}
 
 PARTICIPANTS = [
     {
@@ -112,6 +106,7 @@ def fetch_json(url):
         return {}
 
 def main():
+    # Récupérer l'ancien classement pour calculer la tendance (montée/descente)
     previous_ranks = {}
     if os.path.exists("data.json"):
         try:
@@ -168,48 +163,35 @@ def main():
             continue
             
         raw_pos = p_data.get('position', 'F')
-        
-        if pid in POSITION_OVERRIDES:
-            pos = POSITION_OVERRIDES[pid]
-        else:
-            pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
+        pos = "G" if raw_pos == 'G' else ("D" if raw_pos == 'D' else "A")
         
         first_name = p_data.get('firstName', {}).get('default', '')
         last_name = p_data.get('lastName', {}).get('default', '')
         full_name = f"{first_name} {last_name}".strip()
         
         stats_dict = {}
+        for sub in p_data.get('seasonTotals', []):
+            if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
+                stats_dict = sub
+                break
         
-        # 1. Tenter d'abord de lire featuredStats si la saison courante y est active
-        featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
-        feat_season = str(p_data.get('featuredStats', {}).get('season', ''))
-        
-        if featured and feat_season == SEASON_ID:
-            stats_dict = featured
-
-        # 2. Chercher dans seasonTotals STRICTEMENT la saison SEASON_ID
         if not stats_dict:
-            for sub in p_data.get('seasonTotals', []):
-                if str(sub.get('season')) == SEASON_ID and sub.get('gameTypeCode') == 2:
-                    stats_dict = sub
-                    break
-
-        # 3. Fallback direct sur featuredStats si présent (au cas où season == SEASON_ID n'était pas renseigné dans featuredStats)
-        if not stats_dict and featured:
-            stats_dict = featured
+            featured = p_data.get('featuredStats', {}).get('regularSeason', {}).get('subSeason', {})
+            if str(p_data.get('featuredStats', {}).get('season', '')) == SEASON_ID:
+                stats_dict = featured
 
         if pos == 'G':
-            wins = stats_dict.get('wins', 0) or 0
-            shutouts = stats_dict.get('shutouts', 0) or 0
-            ot_losses = stats_dict.get('otLosses', 0) or 0
+            wins = stats_dict.get('wins', 0)
+            shutouts = stats_dict.get('shutouts', 0)
+            ot_losses = stats_dict.get('otLosses', 0)
             pts = (wins * 4) + (shutouts * 5) + (ot_losses * 1)
             players_stats[pid] = {
                 "name": full_name, "position": "G",
                 "wins": wins, "shutouts": shutouts, "otLosses": ot_losses, "points": pts
             }
         else:
-            goals = stats_dict.get('goals', 0) or 0
-            assists = stats_dict.get('assists', 0) or 0
+            goals = stats_dict.get('goals', 0)
+            assists = stats_dict.get('assists', 0)
             pts = (goals * 3) + (assists * 2) if pos == 'D' else (goals * 2) + (assists * 1)
             players_stats[pid] = {
                 "name": full_name, "position": pos,
@@ -262,8 +244,10 @@ def main():
         if old_rank is None or old_rank == new_rank:
             p["trend"] = "same"
         elif new_rank < old_rank:
+            # Nouveau rang plus petit = le participant a monté
             p["trend"] = "up"
         else:
+            # Nouveau rang plus grand = le participant a descendu
             p["trend"] = "down"
 
     output = {
