@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hatch NHL Super Pool 2026-2027</title>
+    <title>NHL Super Pool</title>
     <style>
         :root {
             --border-color: #34495e;
@@ -32,28 +32,39 @@
             box-sizing: border-box;
         }
 
-        /* En-tête avec Logo Hatch et Titre */
+        /* En-tête avec Logo et Titre */
         .header {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             gap: 15px;
         }
 
+        .brand-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: min(100%, 380px); /* Ajuste la largeur commune du logo et du titre */
+        }
+
         .hatch-logo {
-            max-height: 50px;
-            width: auto;
+            width: 100%;
+            height: auto;
+            max-height: 90px;
             object-fit: contain;
+            display: block;
         }
 
         h1 { 
             text-align: center; 
             color: var(--text-dark); 
-            font-size: clamp(1.6rem, 4vw, 2.4rem); 
-            margin: 0; 
+            font-size: clamp(1.5rem, 4.5vw, 2.3rem); 
+            margin: 10px 0 0 0; 
             font-weight: 800;
+            width: 100%;
+            white-space: nowrap;
         }
 
         .participant-card {
@@ -203,15 +214,18 @@
         @media (max-width: 520px) {
             .main-pill { padding: 8px 12px; }
             .points-breakdown { gap: 10px; }
-            .hatch-logo { max-height: 40px; }
+            .brand-block { width: min(100%, 280px); }
+            h1 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <img src="https://seeklogo.com/images/H/hatch-logo-319345-seeklogo.com.png" alt="Hatch Ltd" class="hatch-logo">
-            <h1>🏒 NHL Super Pool (2026-2027)</h1>
+            <div class="brand-block">
+                <img src="./images/hatch-logo.png" alt="Logo Hatch" class="hatch-logo">
+                <h1>🏒 NHL Super Pool 🥅</h1>
+            </div>
         </header>
 
         <div id="leaderboard">Chargement du classement...</div>
