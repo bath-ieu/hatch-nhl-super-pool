@@ -224,7 +224,7 @@
           "points": 4
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Olivier Jubelin",
@@ -449,7 +449,7 @@
           "points": 4
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Antoine Duguay",
@@ -899,7 +899,7 @@
           "points": 4
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Hak Jun Oh",
@@ -1124,7 +1124,7 @@
           "points": 4
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Alain Roy",
@@ -1799,7 +1799,7 @@
           "points": 10
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Yanick Tremblay",
@@ -2024,7 +2024,7 @@
           "points": 0
         }
       ],
-      "trend": "up"
+      "trend": "same"
     },
     {
       "name": "Jean-Philip Tremblay",
@@ -2249,7 +2249,7 @@
           "points": 10
         }
       ],
-      "trend": "down"
+      "trend": "same"
     },
     {
       "name": "Nicolas St-Pierre",
